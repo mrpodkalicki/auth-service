@@ -1,4 +1,28 @@
 const mongoose = require( 'mongoose' );
+
+
+async function handleError(err){
+    if (err.code) {
+        if (err.code==11000) { 
+            return "duplicate login";    
+        };              
+    } else if ( err.errors ){
+        if (err.errors.login) {                       //LOGIN ERROR
+            if (err.errors.login['kind'] == 'minlength'){  //MIN LENGTH LOGIN ERROR/ MIN:4
+                return "username is to short"; 
+            } else if (err.errors.login['kind'] = 'required'){  //EMPTY LOGIN ERROR
+                return "lack of username";  
+            }
+        } else if ( err.errors.password ) { //PASSWORD ERROR
+            if (err.errors.password['kind'] == 'minlength') { //MIN LENGTH PASSWORD/ ERROR MIN:6
+                return "password is to short";  
+            } else if (err.errors.password['kind'] = 'required') { //EMPTY PASSWORD ERROR
+                return "lack of password"; 
+            }                
+        }
+    }
+}
+
 const userSchema = new mongoose.Schema({
     login: {
         type:String,
@@ -15,8 +39,9 @@ const userSchema = new mongoose.Schema({
     },
     date_created:{ type: Date, default: Date.now},
 });
+
 const User=mongoose.model('User', userSchema );
-const createUser=(login,password)=>{
+async function createUser(login,password){
     if(login && password){
         user = new User({
             login: login,
@@ -31,7 +56,13 @@ const createUser=(login,password)=>{
             password: password,
         });
     }
-    module.exports.user = user
+    try {
+        let result =await user.save()
+        return result
+    } catch (error) {
+        let result = handleError(error)
+        return result
+    }
 }
 module.exports.createUser = createUser
 
