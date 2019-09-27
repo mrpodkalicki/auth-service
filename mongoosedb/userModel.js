@@ -1,10 +1,15 @@
 const mongoose = require( 'mongoose' );
 
 async function handleError(err){
-    // console.log(err)
     if (err.code) {
-        if (err.code==11000) { 
-            return "duplicate login";    
+        if (err.code==11000) {                                 //DUPLICATE KEY
+            const nameObj = Object.getOwnPropertyNames(err.keyPattern)[0]
+            switch (nameObj) {
+                case 'login':                                 //DUPLICATE LOGIN
+                    return "duplicate login";
+                case 'email':                                 //DUPLICATE EMAIL
+                    return "duplicate email";;
+            }
         };              
     } else if ( err.errors ){
         if (err.errors.login) {  
@@ -65,9 +70,8 @@ const userSchema = new mongoose.Schema({
 });
 
 const User=mongoose.model('User', userSchema );
-async function createUser(login,password,email){
-    email='asa'
-    
+async function createUser( login, password, email ){
+
     if ( login && password ){
         user = new User ({
             login: login,
