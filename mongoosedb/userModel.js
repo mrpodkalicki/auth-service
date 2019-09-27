@@ -1,4 +1,5 @@
 const mongoose = require( 'mongoose' );
+const bcrypt = require ( 'bcrypt' );
 
 async function handleError(err){
     if (err.code) {
@@ -6,9 +7,9 @@ async function handleError(err){
             const nameObj = Object.getOwnPropertyNames(err.keyPattern)[0]
             switch (nameObj) {
                 case 'login':                                 //DUPLICATE LOGIN
-                    return "duplicate login";
+                    return " this login exist ";
                 case 'email':                                 //DUPLICATE EMAIL
-                    return "duplicate email";;
+                    return "this email exist";
             }
         };              
     } else if ( err.errors ){
@@ -69,10 +70,19 @@ const userSchema = new mongoose.Schema({
     date_created:{ type: Date, default: Date.now},
 });
 
+userSchema.method('hashPassword', async function (){
+    const salt = await bcrypt.genSalt(5);
+    this.password = await bcrypt.hash(this.password, salt)
+})
+
 const User=mongoose.model('User', userSchema );
 async function createUser( login, password, email ){
+    email="sd111aaa1aaaaaaaf@.pl"
+    login="as1aasa43a21aass5467"
+    password='adsafddsfds'
+    
 
-    if ( login && password ){
+    if ( login && password && email ){
         user = new User ({
             login: login,
             password: password,
@@ -95,9 +105,11 @@ async function createUser( login, password, email ){
             });
     }
     try {
+        await user.hashPassword();
         await user.save()
         return 'user Saved to DB'
     } catch (error) {
+        // console.log(error)
         let result = handleError(error)
         return result
     }
