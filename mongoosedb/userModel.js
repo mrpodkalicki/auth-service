@@ -1,40 +1,41 @@
-const mongoose = require('mongoose');
-
-
+const mongoose = require( 'mongoose' );
 const userSchema = new mongoose.Schema({
     login: {
         type:String,
-        index: true,
-        unique: true,
+        index: { unique: true },
+        unique: true, 
         required:true,
+        minlength:4
     },
     password:{
         type:String,
-        require:true,
+        required:true,
+        minlength:6,
+        select: false
     },
-    date_created:{ type: Date, default: Date.now}
-
+    date_created:{ type: Date, default: Date.now},
 });
-
 const User=mongoose.model('User', userSchema );
+const createUser=(login,password)=>{
+    if(login && password){
+        user = new User({
+            login: login,
+            password: password,
+        });
+    }else if(!password){
+        user = new User({
+            login: login,
+        });
+    }else if(!login){
+        user = new User({
+            password: password,
+        });
+    }
+    module.exports.user = user
+}
+module.exports.createUser = createUser
 
-async function addUser (login,password){
-
-    const user = new User({
-        login: login,
-        password:password
-
-    });
-    let e=0;
-    const ifAdd=await user.save(function (err) 
-    {
-        if (err) return handleError (err);
-        // saved!
-    });
-    console.log(err,'ifadd')
-    return 1
-};
 
 
 
-module.exports.addUser = addUser;
+
