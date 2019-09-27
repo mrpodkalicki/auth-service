@@ -1,28 +1,11 @@
 const database = require( './mongoosedb/userModel');
-var mongoose = require('mongoose');
 
 
-mongoose.connect('mongodb://localhost/userData', {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useCreateIndex: true
-});
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-
-});
-async function show() {
-    const us = 'adi56aaa';
-    const pass = 'sdfsdgfdsgb';
-
-    
-    const result=await database.createUser(us, pass);
+async function creatUser() {
+    const result=await database.createUser(us, pass,email);
     console.log(result)
-}
-
-show()
+}   
+creatUser()
 
 
 

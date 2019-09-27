@@ -71,17 +71,12 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.method('hashPassword', async function (){
-    const salt = await bcrypt.genSalt(5);
-    this.password = await bcrypt.hash(this.password, salt)
+    const salt = await bcrypt.genSalt( 5 );
+    this.password = await bcrypt.hash( this.password, salt )
 })
 
 const User=mongoose.model('User', userSchema );
 async function createUser( login, password, email ){
-    email="sd111aaa1aaaaaaaf@.pl"
-    login="as1aasa43a21aass5467"
-    password='adsafddsfds'
-    
-
     if ( login && password && email ){
         user = new User ({
             login: login,
@@ -109,7 +104,6 @@ async function createUser( login, password, email ){
         await user.save()
         return 'user Saved to DB'
     } catch (error) {
-        // console.log(error)
         let result = handleError(error)
         return result
     }
