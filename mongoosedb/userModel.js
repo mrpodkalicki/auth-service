@@ -67,7 +67,13 @@ const userSchema = new mongoose.Schema({
         minlength:5,
         maxlength: 256,
     },
-    date_created:{ type: Date, default: Date.now},
+    admin:{
+        type:Boolean,
+        default:false
+    },
+    date_created:{ 
+        type: Date, 
+        default: Date.now},
 });
 
 userSchema.method('hashPassword', async function (){
@@ -76,12 +82,13 @@ userSchema.method('hashPassword', async function (){
 })
 
 const User=mongoose.model('User', userSchema );
-async function createUser( login, password, email ){
+async function createUser( login, password, email, admin ){
     if ( login && password && email ){
         user = new User ({
             login: login,
             password: password,
-            email: email
+            email: email,
+            admin:admin
         });
     } else if ( !password ){
         user = new User ({
