@@ -57,8 +57,8 @@ async function createUser(login,password){
         });
     }
     try {
-        let result =await user.save()
-        return result
+        await user.save()
+        return 'user Saved to DB'
     } catch (error) {
         let result = handleError(error)
         return result

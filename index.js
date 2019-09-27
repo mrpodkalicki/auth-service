@@ -14,8 +14,8 @@ db.once('open', function () {
 
 });
 async function show() {
-    const us = 'aaaaa';
-    const pass = null;
+    const us = 'aaaaaaaa';
+    const pass = 'sdfsdgfdsgb';
 
     
     const result=await database.createUser(us, pass);
