@@ -1,3 +1,5 @@
+const express = require('express');
+const app = express();
 const database = require( './mongoosedb/userModel');
 
 
@@ -6,8 +8,11 @@ async function creatUser() {
     console.log(result)
 }   
 creatUser()
+app.get('/', (req, res) => {
+    res.send('Hello World');
+});
 
 
-
-
+const port = process.env.PORT || 3000;
+app.listen(port);
 
