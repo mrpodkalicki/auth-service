@@ -79,6 +79,11 @@ const userSchema = new mongoose.Schema({
 userSchema.method('hashPassword', async function (){
     const salt = await bcrypt.genSalt( 5 );
     this.password = await bcrypt.hash( this.password, salt )
+});
+userSchema.method('validPassword', async function (password) {
+    const user = this;
+    const compare = await bcrypt.compare(password, user.password);
+    return compare;
 })
 
 const User=mongoose.model('User', userSchema );
