@@ -9,8 +9,8 @@ app.use(express.json());
 connectdb.connectToDB();
 
 async function creatUser() {
-    const result=await database.createUser(us, pass,email);
-    console.log(result)
+    // const result=await database.createUser(us, pass,email);
+    // console.log(result)
 }   
 creatUser()
 
