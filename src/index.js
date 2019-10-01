@@ -31,7 +31,8 @@ app.put('/api/users/:id', handler.updateUser);
 // For testing registration page. Can be deleted if registration rout will be ready.
 app.post('/users', (req, res) => {
     console.log('Hello from POST!');
-    res.send(req.body);
+    console.log(req.body);
+    res.render('registered', { login: req.body.login });  
 });
 ////////////////////////////////////////////////////////
 
