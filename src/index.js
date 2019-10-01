@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const connectdb = require('./mongoosedb/connectDB');
 const database = require( './mongoosedb/userModel');
 const handler = require( './handlers/updateUser');
+const register = require('./handlers/registerUser');
 
 const app = express();
 
@@ -15,8 +16,8 @@ app.set('view engine', 'ejs');
 connectdb.connectToDB();
 
 async function creatUser() {
-    const result=await database.createUser(us, pass,email);
-    console.log(result)
+    const result=await database.createUser(us, pass, email);
+    console.log(result);
 }   
 creatUser()
 
@@ -27,14 +28,7 @@ app.get('/', (req, res) => {
 });
 
 app.put('/api/users/:id', handler.updateUser);
-
-// For testing registration page. Can be deleted if registration rout will be ready.
-app.post('/users', (req, res) => {
-    console.log('Hello from POST!');
-    console.log(req.body);
-    res.render('registered', { login: req.body.login });  
-});
-////////////////////////////////////////////////////////
+app.post('/api/users/', register.registerUser);
 
 const port = process.env.PORT || 3000;
 app.listen(port);
