@@ -9,4 +9,4 @@ async function connectToDB() {
     }
 }
 
-module.exports.connectdb = connectToDB;
+module.exports.connectToDB = connectToDB;
