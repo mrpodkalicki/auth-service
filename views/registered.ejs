@@ -9,24 +9,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"/>
     <style>
         body {
-            background-color: #303030;
+            background-color: lightslategrey;
             padding: 10px; 
             font-family: 'Ubuntu', sans-serif;
         }
         .ui.button {
             margin-top: 15px;
-            margin-left: 75%;
         }
 
-        .container {
+        #main {
             width: 40%;
-            margin-top: 8%;
+            margin-top: 10%;
             margin-bottom: auto;
             margin-left: auto;
             margin-right: auto;
-            background-color: #666666;
-            border-radius: 5%;
-            padding: 15px;
+            border: 2px solid black;
+            background-color: rgb(170, 170, 180))
         }
         h1 {
             font-weight: bold;
@@ -39,7 +37,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="main">
         <h1 class="ui header">Registration</h1>
         <h3 class="ui header">Add new user</h3>
         <form class="ui form" action="http://localhost:3000/users" method="POST">
