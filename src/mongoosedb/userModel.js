@@ -3,16 +3,16 @@ const bcrypt = require('bcrypt');
 
 async function handleError(err){
     if (err.code) {
-        if (err.code==11000) {                                 //DUPLICATE KEY
+        if (err.code == 11000) {                                 //DUPLICATE KEY
             const nameObj = Object.getOwnPropertyNames(err.keyPattern)[0]
             switch (nameObj) {
                 case 'login':                                 //DUPLICATE LOGIN
-                    return " this login exist ";
+                    return "this login exist";
                 case 'email':                                 //DUPLICATE EMAIL
                     return "this email exist";
             }
         };              
-    } else if ( err.errors ){
+    } else if (err.errors){
         if (err.errors.login) {  
             switch ( err.errors.login['kind'] ) {
                 case 'required':                           //EMPTY LOGIN ERROR
@@ -22,7 +22,7 @@ async function handleError(err){
                case 'maxlength':                            //MAX LENGTH LOGIN ERROR/ MAX:64
                     return "login is to long";
             }
-        } else if ( err.errors.password ) { //PASSWORD ERROR
+        } else if (err.errors.password) { //PASSWORD ERROR
             switch (err.errors.password['kind']) {
                 case 'required':                       //EMPTY PASSWORD ERROR
                     return "lack of password";
@@ -77,27 +77,27 @@ const userSchema = new mongoose.Schema({
     },
 });
 
-userSchema.method('hashPassword', async function (){
+userSchema.method('hashPassword', async function() {
     const salt = await bcrypt.genSalt(5);
-    this.password = await bcrypt.hash(this.password, salt)
+    this.password = await bcrypt.hash(this.password, salt);
 })
 
 const User=mongoose.model('User', userSchema);
-async function createUser(login, password, email, admin){
-    if ( login && password && email ){
-        user = new User ({
+async function createUser(login, password, email, admin) {
+    if (login && password && email) {
+        user = new User({
             login: login,
             password: password,
             email: email,
             admin: admin
         });
-    } else if (!password){
-        user = new User ({
+    } else if (!password) {
+        user = new User({
             login: login,
             email: email
         });
-    } else if(!login){
-        user = new User ({
+    } else if(!login) {
+        user = new User({
             password: password,
             email: email
         });
@@ -109,11 +109,11 @@ async function createUser(login, password, email, admin){
     }
     try {
         await user.hashPassword();
-        await user.save()
-        return 'user Saved to DB'
+        await user.save();
+        return 'user Saved to DB';
     } catch (error) {
-        let result = handleError(error)
-        return result
+        let result = handleError(error);
+        return result;
     }
 }
 

@@ -1,9 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const connectdb = require('./mongoosedb/connectDB');
-const database = require( './mongoosedb/userModel');
-const handler = require( './handlers/updateUser');
-const register = require('./handlers/registerUser');
+const database = require('./mongoosedb/userModel');
+const handlers = require('./mongoosedb/user');
 
 const app = express();
 
@@ -27,8 +26,8 @@ app.get('/', (req, res) => {
     //res.send('Hello World');
 });
 
-app.put('/api/users/:id', handler.updateUser);
-app.post('/api/users/', register.registerUser);
+app.put('/api/users/:id', handlers.updateUser);
+app.post('/api/users/', handlers.registerUser);
 
 const port = process.env.PORT || 3000;
 app.listen(port);
