@@ -1,5 +1,5 @@
-const mongoose = require( 'mongoose' );
-const bcrypt = require ( 'bcrypt' );
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 async function handleError(err){
     if (err.code) {
@@ -46,65 +46,66 @@ async function handleError(err){
 const userSchema = new mongoose.Schema({
     
     login: {
-        type:String,
+        type: String,
         index: { unique: true },
         unique: true, 
-        required:true,
-        minlength:4,
-        maxlength: 64,
+        required: true,
+        minlength: 4,
+        maxlength: 64
     },
     password: {
-        type:String,
-        required:true,
-        minlength:6,
-        maxlength:512,
+        type: String,
+        required: true,
+        minlength: 6,
+        maxlength: 512,
         select: false
     },
     email: {
-        type:String,
+        type: String,
         unique: true, 
-        required:true,
-        minlength:5,
-        maxlength: 256,
+        required: true,
+        minlength: 5,
+        maxlength: 256
     },
     admin:{
-        type:Boolean,
-        default:false
+        type: Boolean,
+        default: false
     },
     date_created:{ 
         type: Date, 
-        default: Date.now},
+        default: Date.now
+    },
 });
 
 userSchema.method('hashPassword', async function (){
-    const salt = await bcrypt.genSalt( 5 );
-    this.password = await bcrypt.hash( this.password, salt )
+    const salt = await bcrypt.genSalt(5);
+    this.password = await bcrypt.hash(this.password, salt)
 })
 
-const User=mongoose.model('User', userSchema );
-async function createUser( login, password, email, admin ){
+const User=mongoose.model('User', userSchema);
+async function createUser(login, password, email, admin){
     if ( login && password && email ){
         user = new User ({
             login: login,
             password: password,
             email: email,
-            admin:admin
+            admin: admin
         });
-    } else if ( !password ){
+    } else if (!password){
         user = new User ({
             login: login,
             email: email
         });
-     }else if( !login ){
+    } else if(!login){
         user = new User ({
             password: password,
             email: email
         });
-        } else if ( !email ) {
-            user = new User({
-                login: login,
-                password: password,
-            });
+    } else if (!email) {
+        user = new User({
+            login: login,
+            password: password,
+        });
     }
     try {
         await user.hashPassword();
@@ -118,3 +119,4 @@ async function createUser( login, password, email, admin ){
 
 module.exports.createUser = createUser;
 module.exports.User = User;
+module.exports.handleError = handleError;
