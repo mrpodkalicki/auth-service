@@ -9,12 +9,12 @@ module.exports = function(passport){
     })
 
     passport.use('login', new LocalStrategy({
-        usernameField : 'login',
-        passwordField : 'password',
-        passReqToCallback : true
+        usernameField: 'login',
+        passwordField: 'password',
+        passReqToCallback: true
     },
     (req, login, password, done) => { 
-        User.findOne({ 'login' :  login }, (err, user) => {
+        User.findOne({ 'login':  login }, (err, user) => {
             const message = "Invalid login or password."
             if (err)
                 return done(err);
