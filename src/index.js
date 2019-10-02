@@ -9,6 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use('/public', express.static('public'));
 
 app.set('view engine', 'ejs');
 
@@ -22,18 +23,36 @@ creatUser()
 
 app.get('/', (req, res) => {
     console.log('Hello from GET!');
-    res.render('register');
+    res.render('index', { loggedout: false, registered: false , login: "" });
     //res.send('Hello World');
 });
 
 app.put('/api/users/:id', handler.updateUser);
 
-// For testing registration page. Can be deleted if registration rout will be ready.
+// For testing registration and login page. Can be deleted if registration and login rout will be ready.
 app.post('/users', (req, res) => {
     console.log('Hello from POST!');
     console.log(req.body);
-    res.render('registered', { login: req.body.login });  
+    res.render('index', { loggedout: false, registered: true, login: req.body.login });  
 });
+
+app.post('/login',(req, res) => {
+    console.log('Hello from POST!');
+    console.log(req.body);
+    res.render('loggedIn', { login: req.body.login, admin: true});  
+});
+
+app.get('/admin', (req, res) => {
+    console.log('Hello from GET!');
+    console.log(req.body);
+    res.send('Widok admina');  
+})
+
+app.get('/loggedout', (req, res) => {
+    console.log('Hello from GET!');
+    console.log(req.body);
+    res.render('index', { loggedout: true, registered: false, login: "" });  
+})
 ////////////////////////////////////////////////////////
 
 const port = process.env.PORT || 3000;
