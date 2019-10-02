@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
     //res.send('Hello World');
 });
 
-app.put('/api/users/:id', handler.updateUser);
+app.put('/api/users/:id', handlers.updateUser);
 app.post('/users/', handlers.registerUser);
 
 // For testing registration and login page. Can be deleted if registration and login rout will be ready.
