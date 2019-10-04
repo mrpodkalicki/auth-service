@@ -1,25 +1,29 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const connectdb = require('./mongoosedb/connectDB');
-const database = require('./mongoosedb/userModel');
-const handlers = require('./mongoosedb/user');
+const database = require('./app/models/userModel');
+const handlers = require('./app/routes');
+const passport = require('passport');
 
 const app = express();
+
+require('./config/passport')(passport);
 
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/public', express.static('public'));
+app.use(passport.initialize());
 
 app.set('view engine', 'ejs');
 
 connectdb.connectToDB();
 
-async function creatUser() {
-    const result=await database.createUser(us, pass, email);
-    console.log(result);
-}   
-creatUser()
+// async function createUser() {
+//     const result=await database.createUser(us, pass, email);
+//     console.log(result);
+// }   
+// createUser()
 
 app.get('/', (req, res) => {
     console.log('Hello from GET!');

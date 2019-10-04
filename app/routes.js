@@ -1,8 +1,8 @@
-const model = require('./userModel');
+const model = require('./models/userModel');
 const User = model.User;
 
 const registerUser = async (req, res) => {
-    if (req.body.password === req.body.confirmPassword) {
+    if (req.body.password === req.body.confirm_password) {
         let user = new User({
             login: req.body.login,
             password: req.body.password,
@@ -12,7 +12,7 @@ const registerUser = async (req, res) => {
         try {
             await user.hashPassword();
             await user.save();
-            return 'User saved.'
+            res.render('index', { loggedout: false, registered: true, login: req.body.login });  
         } catch (error) {
             let result = model.handleError(error);
             return result;

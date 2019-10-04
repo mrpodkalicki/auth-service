@@ -117,6 +117,8 @@ async function createUser(login, password, email, admin) {
     }
 }
 
+userSchema.methods.validPassword = password => bcrypt.compareSync(password, this.local.password);
+
 module.exports.createUser = createUser;
 module.exports.User = User;
 module.exports.handleError = handleError;
