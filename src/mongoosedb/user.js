@@ -12,13 +12,15 @@ const registerUser = async (req, res) => {
         try {
             await user.hashPassword();
             await user.save();
-            return 'User saved.'
+            res.send('User saved.');
         } catch (error) {
-            let result = model.handleError(error);
-            return result;
+            res.status(500).send(error.message);
         }
     }
-    else return 'Passwords are not equal.';
+    else if (req.body.confirmPassword) {
+        res.status(400).send('Passwords are not equal.');
+    }
+    else res.status(400).send('You have to confirm password.');
 };
 
 const updateUser = async (req, res) => {
