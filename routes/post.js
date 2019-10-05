@@ -6,17 +6,22 @@ const router = express.Router();
 
 
 
-router.post('/login', 
-passport.authenticate('local', { failureRedirect: '/login' }),
-async function( req, res) {
-  const body = {
-    _id: req.user._id,
-    email: req.user.email
-  };
-const token = jwt.sign({
-  user: body
-  }, 'top_secret');
-res.send({ token });
-});
+router.post('/',
+    passport.authenticate('local', {
+        failureRedirect: '/login',
+        failuereFlash:true
+    }),
+    async function (req, res) {
+        const user = {
+            _id: req.user._id,
+            
+        };
+        const token = jwt.sign( {
+          user:user
+        }, 'top_secret',(err,token) => {
+              res.redirect(`login/user/?secret_token=${token}`)
+        })
+        return token
+    });
 
 module.exports = router;

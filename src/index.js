@@ -1,5 +1,10 @@
 const express = require('express');
+const  passport = require('passport');
+const  cookieParser = require('cookie-parser')
+const session = require('express-session');
+const flash = require('connect-flash')
 const bodyParser = require('body-parser');
+const logger = require('morgan');
 const connectdb = require('./mongoosedb/connectDB');
 const database = require('./mongoosedb/userModel');
 const handlers = require('./mongoosedb/user');
@@ -26,7 +31,7 @@ app.get('/', (req, res) => {
     res.render('index', { loggedout: false, registered: false , login: "" });
     //res.send('Hello World');
 });
-
+require('../src/config/passport')(passport);
 app.put('/api/users/:id', handlers.updateUser);
 app.post('/api/users/', handlers.registerUser);
 
