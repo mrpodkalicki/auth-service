@@ -8,12 +8,12 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 }
 
 const User = require('../models/userModel').User;
+
 const { auth } = require('../../config/auth');
 const admin = require('../../config/admin');
 
-const router = express.Router();
-
-
+const
+router = express.Router();
 router.post('/login',
     passport.authenticate('local', {
         failureRedirect: '/',
@@ -24,19 +24,16 @@ router.post('/login',
             _id: req.user._id,
         };
         const token = jwt.sign({
-            userID: userTotoken,
-            admin: req.user.admin
-        }, 
-        'top_secret',
-        // process.env.JWT_SECRET,
-        (err, token) => {
-            res.redirect(`login/user/?secret_token=${token}`);
-        })
-        return token
+                userID: userTotoken,
+                admin: req.user.admin
+            },
+            'SIEMA',
+            // process.env.JWT_SECRET,
+            (err, token) => {
+                return res.redirect(`/users/loggedin/?secret_token=${token}`);
+            })
+        
     });
-
-//  process.env.JWT_SECRET
- 
 
 router.post('/register', async (req, res) => {
     const log = await User.findOne({ login: req.body.login });

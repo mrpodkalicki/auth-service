@@ -10,9 +10,8 @@
     "type": "git",
     "url": "git+https://github.com/cc-team-delta/auth-service.git"
   },
-  "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/cc-team-delta/auth-service/issues"
   },
