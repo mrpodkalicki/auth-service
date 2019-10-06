@@ -18,11 +18,11 @@
 
     <div class="buttons">
         <% if(admin) { %>
-        <form action="http://localhost:3000/admin" method="GET">
+        <form action="http://localhost:3000/users/admin" method="GET">
             <button class="ui button" type="submit">Admin options</button>
         </form>
         <% } %>
-        <form action="http://localhost:3000/loggedout" method="GET">
+        <form action="http://localhost:3000/users/loggedout" method="GET">
             <button class="ui button" type="submit">Logout</button>
         </form>
     </div>
