@@ -35,20 +35,14 @@ module.exports = function (passport) {
         }));
 
     const jwtOptions = {
-        jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-        secretOrKey: 'secretCCTeamDeltaAuthService'
+        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+        secretOrKey: process.env.JWT_SECRET
     };
 
-    passport.use('jwtLogin', new JwtStrategy(jwtOptions, function (payload, done) {
-        User.findById(payload.sub, function (err, user) {
-            if (err) { return done(err, false); }
-
-            if (user) {
-                done(null, user);
-            } else {
-                done(null, false);
-            }
-        });
+    passport.use( new JwtStrategy(jwtOptions, (payload, done) => {
+        return User.findOne({_id: payload.id})
+        .then( user => done(null, user))
+        .catch(err => done(err));
     }));
 
 }

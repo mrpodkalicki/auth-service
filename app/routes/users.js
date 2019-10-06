@@ -1,20 +1,28 @@
 const express = require("express");
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
+
+if (typeof localStorage === "undefined" || localStorage === null) {
+    const LocalStorage = require('node-localstorage').LocalStorage;
+    localStorage = new LocalStorage('./scratch');
+}
 
 const User = require('../models/userModel').User;
-const {auth} = require('../../config/auth');
+const { auth } = require('../../config/auth');
+const admin = require('../../config/admin');
 
 const router = express.Router();
 
-router.post('/login', async (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
-        if (err) { return next(err); }
-        if (!user) { return res.redirect('/users/loginError'); }
-        req.logIn(user, err => {
-          if (err) { return next(err); }
-          return res.redirect('/users/loggedIn');
-        });
-      })(req, res, next);
+
+router.post('/login', passport.authenticate('local', { session: false }), (req, res, next) => {
+    const token = jwt.sign(
+        {
+            id: req.user._id,
+            admin: req.user.admin
+        },
+        process.env.JWT_SECRET
+    )
+    res.send(token);
 });
 
 router.post('/register', async (req, res) => {
@@ -58,9 +66,8 @@ router.put('/update/:id', async (req, res) => {
     res.send(result);
 })
 
-router.get('/loggedIn', auth, (req, res) => {
-    console.log(req.user);
-    res.render('loggedIn', { login: req.body.login, admin: req.body.admin });
+router.get('/loggedin', auth, (req, res) => {
+    res.render('loggedIn', { login: req.user.login, admin: req.user.admin });
 })
 
 router.get('/loginError', (req, res) => {
@@ -68,13 +75,13 @@ router.get('/loginError', (req, res) => {
 })
 
 router.get('/loggedout', (req, res) => {
-    req.logOut();
+    localStorage.removeItem('x-auth-token');
     res.render('index', { message: "User successfully logged out", login: "" });
 })
 
 // For testing registration and login page. Can be deleted if registration and login rout will be ready.
 
-router.get('/admin', (req, res) => {
+router.get('/admin', [auth, admin], (req, res) => {
     console.log('Hello from GET!');
     console.log(req.body);
     res.send('Widok admina');
