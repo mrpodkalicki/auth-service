@@ -1,5 +1,8 @@
 const LocalStrategy = require("passport-local").Strategy;
-const User = require("../mongoosedb/userModel").User;
+const User = require('../mongoosedb/userModel').User;
+const JWTstrategy = require('passport-jwt').Strategy;
+const ExtractJWT = require('passport-jwt').ExtractJwt;
+const jwt = require('jsonwebtoken');
 
 module.exports = function(passport){
     passport.serializeUser((user, done) => done(null, user.id));
@@ -8,21 +11,22 @@ module.exports = function(passport){
         User.findById(id, (err, user) => done(null, user.id));
     })
 
-    passport.use('login', new LocalStrategy({
+    passport.use( new LocalStrategy({
         usernameField: 'login',
         passwordField: 'password',
         passReqToCallback: true
     },
     (req, login, password, done) => { 
-        User.findOne({ 'login':  login }, (err, user) => {
+        User.findOne({ 'login':  login },async  (err, user) => {
             const message = "Invalid login or password."
             if (err)
                 return done(err);
 
             if (!user)
                 return done(null, false, req.flash('loginMessage', message));
-
-            if (!user.validPassword(password))
+                // console.log(password,'pass')
+                const validate = await user.validPassword(password);
+                if (!validate)
                 return done(null, false, req.flash('loginMessage', message));
 
             return done(null, user);

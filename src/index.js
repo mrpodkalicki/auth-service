@@ -18,11 +18,21 @@ app.use('/public', express.static('public'));
 
 app.set('view engine', 'ejs');
 
-connectdb.connectToDB();
 
+
+
+connectdb.connectToDB();
+app.use(logger('dev'));
+app.use(require('morgan')('combined'));
+app.use(require('body-parser').urlencoded({
+  extended: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 async function creatUser() {
-    const result=await database.createUser(us, pass, email);
-    console.log(result);
+    // const result=await database.createUser('adi94', 'adi94', 'siema@gm.pl');
+    // console.log(result);
 }   
 creatUser()
 
@@ -35,12 +45,14 @@ require('../src/config/passport')(passport);
 app.put('/api/users/:id', handlers.updateUser);
 app.post('/api/users/', handlers.registerUser);
 
+app.use('/login',require('../routes/post'));
+
 // For testing registration and login page. Can be deleted if registration and login rout will be ready.
-app.post('/login',(req, res) => {
-    console.log('Hello from POST!');
-    console.log(req.body);
-    res.render('loggedIn', { login: req.body.login, admin: true});  
-});
+// app.post('/login',(req, res) => {
+//     console.log('Hello from POST!');
+//     console.log(req.body);
+//     res.render('loggedIn', { login: req.body.login, admin: true});  
+// });
 
 app.get('/admin', (req, res) => {
     console.log('Hello from GET!');

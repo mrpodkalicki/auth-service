@@ -4,7 +4,13 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 
-
+router.get('/',
+    function (req, res) {
+       
+        res.render('loggedIn', {
+            message: req.flash('loginMessage')
+        })
+    })
 
 router.post('/',
     passport.authenticate('local', {
