@@ -45,7 +45,7 @@ require('../src/config/passport')(passport);
 app.put('/api/users/:id', handlers.updateUser);
 app.post('/api/users/', handlers.registerUser);
 
-app.use('/login',require('../routes/post'));
+app.use('/',require('../routes/post'));
 
 // For testing registration and login page. Can be deleted if registration and login rout will be ready.
 // app.post('/login',(req, res) => {

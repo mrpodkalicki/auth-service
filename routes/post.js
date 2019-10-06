@@ -7,14 +7,14 @@ const router = express.Router();
 router.get('/',
     function (req, res) {
        
-        res.render('loggedIn', {
+        res.redirect('/', {
             message: req.flash('loginMessage')
         })
     })
 
-router.post('/',
+router.post('/login',
     passport.authenticate('local', {
-        failureRedirect: '/login',
+        failureRedirect: '/',
         failuereFlash:true
     }),
     async function (req, res) {
@@ -22,10 +22,18 @@ router.post('/',
             _id: req.user._id,
             
         };
+        const login = req.user.login;
         const token = jwt.sign( {
           user:user
         }, 'top_secret',(err,token) => {
-              res.redirect(`login/user/?secret_token=${token}`)
+            // console.log(req.user.login,"LOGIN")
+                
+                res.render('loggedIn',{ 
+                    login:req.user.login,
+                    admin:req.user.admin
+                
+                } );
+            //   res.redirect(`loggedIn/?secret_token=${token}`)
         })
         return token
     });
