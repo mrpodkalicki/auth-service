@@ -1,7 +1,6 @@
 async function getUsers() {
     const response = await fetch("http://localhost:8000/api/users");
     const result = await response.json();
-    console.log(result);
     return result;
 };
 
@@ -23,7 +22,7 @@ async function postUser(login, email, password, confirm_password, admin) {
     });
 
     const result = await response.json();
-    console.log(result);
+    return result;
 };
 
 async function putUser(user) {
@@ -40,7 +39,7 @@ async function putUser(user) {
     });
 
     const result = await response.json();
-    console.log(result);
+    return result;
 };
 
 async function deleteUser(id) {
@@ -51,9 +50,8 @@ async function deleteUser(id) {
         method: "delete"
     });
 
-    //console.log(response);
     const result = await response.json();
-    console.log(result);
+    return result;
 };
 
 module.exports.getUsers = getUsers;
