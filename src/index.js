@@ -44,7 +44,6 @@ app.get('/', async (req, res) => {
 app.put('/api/users/:id', handlers.updateUser);
 app.post('/api/users/', handlers.registerUser);
 app.get('/api/users', handlers.getUsers);
-app.delete('/api/users/:id', handlers.deleteUser);
 
 // For testing registration and login page. Can be deleted if registration and login rout will be ready.
 app.post('/login',(req, res) => {

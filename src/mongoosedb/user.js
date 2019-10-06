@@ -49,11 +49,6 @@ const getUsers = async (req, res) => {
     res.send(users);
 }
 
-const deleteUser = async (req, res) => {
-    const result = await User.deleteOne( { _id: req.params.id });
-    console.log(result);
-};
-
 module.exports.registerUser = registerUser;
 module.exports.updateUser = updateUser;
 module.exports.getUsers = getUsers;
