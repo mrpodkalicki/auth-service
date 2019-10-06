@@ -1,10 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import { Provider } from 'react-redux';
+import App from './components/App';
+import { AppContainer } from 'react-hot-loader'
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import  confStore  from './configureStore';
+
+const container =document.getElementById('root') 
+ReactDOM.render(
+    <AppContainer>
+        <Provider store = {confStore()}>
+        <App /> 
+    </Provider>
+    </AppContainer>,
+    container
+    
+ 
+    
+
+
+
+
+
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
