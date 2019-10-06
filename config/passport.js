@@ -35,7 +35,7 @@ module.exports = function (passport) {
         }));
 
     const jwtOptions = {
-        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+        jwtFromRequest: ExtractJwt.fromUrlQueryParameter('secret_token'),
         secretOrKey: process.env.JWT_SECRET
     };
 

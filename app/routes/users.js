@@ -22,7 +22,7 @@ router.post('/login', passport.authenticate('local', { session: false }), (req, 
         },
         process.env.JWT_SECRET
     )
-    res.send(token);
+    res.redirect(`/users/loggedin/?secret_token=${token}`);
 });
 
 router.post('/register', async (req, res) => {
