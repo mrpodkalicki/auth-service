@@ -13,11 +13,8 @@
 
 <body>
     <main>
-        <% if(loggedout) { %>
-            <% include loggedout.ejs %>
-        <% } %>
-        <% if(registered) { %>
-           <% include registered.ejs %>
+        <% if(message) { %>
+            <% include message.ejs %>
         <% } %>
         <div class="content">
             <% include login.ejs %>
