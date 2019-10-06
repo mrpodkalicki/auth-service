@@ -11,5 +11,11 @@
             <input type="password" name="password" id="password" placeholder="password">
         </div>
         <button class="ui button" type="submit">Submit</button>
+        <div>
+        <div>
+            <% if (message.length) { %>
+                <h1> <%= message %></h1>
+                <% } %>
+        </div>      
     </form>
 </div>

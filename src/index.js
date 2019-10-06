@@ -28,7 +28,11 @@ app.use(require('body-parser').urlencoded({
   extended: true
 }));
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(session({
+    secret: 'ses',
+    resave: false,
+    saveUninitialized: true,
+  }));
 app.use(flash());
 async function creatUser() {
     // const result=await database.createUser('adi94', 'adi94', 'siema@gm.pl');
@@ -36,16 +40,12 @@ async function creatUser() {
 }   
 creatUser()
 
-app.get('/', (req, res) => {
-    console.log('Hello from GET!');
-    res.render('index', { loggedout: false, registered: false , login: "" });
-    //res.send('Hello World');
-});
+
 require('../src/config/passport')(passport);
 app.put('/api/users/:id', handlers.updateUser);
 app.post('/api/users/', handlers.registerUser);
 
-app.use('/',require('../routes/post'));
+app.use('/',require('../routes/login'));
 
 // For testing registration and login page. Can be deleted if registration and login rout will be ready.
 // app.post('/login',(req, res) => {

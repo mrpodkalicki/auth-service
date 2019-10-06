@@ -3,14 +3,10 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 
+router.get('/', (req, res) => {
+    res.render('index', { loggedout: false, registered: false , login: "",message:req.flash('loginMessage') });
 
-router.get('/',
-    function (req, res) {
-       
-        res.redirect('/', {
-            message: req.flash('loginMessage')
-        })
-    })
+});
 
 router.post('/login',
     passport.authenticate('local', {
@@ -26,14 +22,11 @@ router.post('/login',
         const token = jwt.sign( {
           user:user
         }, 'top_secret',(err,token) => {
-            // console.log(req.user.login,"LOGIN")
-                
                 res.render('loggedIn',{ 
                     login:req.user.login,
                     admin:req.user.admin
-                
-                } );
-            //   res.redirect(`loggedIn/?secret_token=${token}`)
+                },res.redirect(`loggedIn/?secret_token=${token}`) );
+            
         })
         return token
     });
