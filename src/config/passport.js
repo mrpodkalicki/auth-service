@@ -34,4 +34,28 @@ module.exports = function(passport){
 
     }));
 
+     var opts = {}
+     // jwtFromRequest: ExtractJWT.fromUrlQueryParameter('secret_token')
+        opts.jwtFromRequest = ExtractJWT.fromUrlQueryParameter('secret_token');
+
+         opts.secretOrKey = 'top_secret';
+
+     passport.use(new JWTstrategy(opts, function (jwt_payload, done) {
+         User.findOne({
+             _id: jwt_payload.userID
+         }, function (err, user) {
+             if (err) {
+                 return done(err, false);
+             }
+
+             if (user) {
+
+                 return done(null, user);
+             } else {
+                 return done(null, false);
+                 // or you could create a new account
+             }
+         });
+     }));
+
 }

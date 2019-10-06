@@ -14,20 +14,16 @@ router.post('/login',
         failuereFlash:true
     }),
     async function (req, res) {
-        const user = {
+        const userTotoken = {
             _id: req.user._id,
-            
         };
-        const login = req.user.login;
         const token = jwt.sign( {
-          user:user
+          userID:userTotoken
         }, 'top_secret',(err,token) => {
-                res.render('loggedIn',{ 
-                    login:req.user.login,
-                    admin:req.user.admin
-                },res.redirect(`loggedIn/?secret_token=${token}`) );
+            res.redirect(`login/user/?secret_token=${token}`);
             
         })
+       
         return token
     });
 
