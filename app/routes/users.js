@@ -92,7 +92,7 @@ router.get('/api/users', (req, res) => {
     res.render('index', { message: "User successfully logged out", login: "" });
 })
 
-router.get('/api/getusers', (req, res) => {
+router.get('/api/getusers', async(req, res) => {
     const users = await User.find();
     res.send(users);
 })
