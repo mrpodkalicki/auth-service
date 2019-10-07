@@ -8,22 +8,32 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 }
 
 const User = require('../models/userModel').User;
+
 const { auth } = require('../../config/auth');
 const admin = require('../../config/admin');
 
-const router = express.Router();
-
-
-router.post('/login', passport.authenticate('local', { session: false }), (req, res, next) => {
-    const token = jwt.sign(
-        {
-            id: req.user._id,
-            admin: req.user.admin
-        },
-        process.env.JWT_SECRET
-    )
-    res.redirect(`/users/loggedin/?secret_token=${token}`);
-});
+const
+router = express.Router();
+router.post('/login',
+    passport.authenticate('local', {
+        failureRedirect: '/',
+        failuereFlash: true
+    }),
+    async function (req, res) {
+        const userTotoken = {
+            _id: req.user._id,
+        };
+        const token = jwt.sign({
+                userID: userTotoken,
+                admin: req.user.admin
+            },
+            'SIEMA',
+            // process.env.JWT_SECRET,
+            (err, token) => {
+                return res.redirect(`/users/loggedin/?secret_token=${token}`);
+            })
+        
+    });
 
 router.post('/register', async (req, res) => {
     const log = await User.findOne({ login: req.body.login });
@@ -82,7 +92,7 @@ router.get('/api/users', (req, res) => {
     res.render('index', { message: "User successfully logged out", login: "" });
 })
 
-router.get('/api/getusers', (req, res) => {
+router.get('/api/getusers', async(req, res) => {
     const users = await User.find();
     res.send(users);
 })

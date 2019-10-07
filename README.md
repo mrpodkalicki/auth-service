@@ -1,4 +1,22 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+This is a sample application for regular user and administrator login.
+
+## Instruction
+    git clone https://github.com/cc-team-delta/auth-service.git
+    cd auth-service
+    npm install
+
+Start the server.
+    node index.js
+
+Open a web browser and navigate to http://localhost:3000/ to see the example in action. 
+
+
+
+## Second part app is React App
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) in admin-app folder and [node.js].
+
 
 ## Available Scripts
 
