@@ -5,15 +5,13 @@ const jwt = require('jsonwebtoken');
 if (typeof localStorage === "undefined" || localStorage === null) {
     const LocalStorage = require('node-localstorage').LocalStorage;
     localStorage = new LocalStorage('./scratch');
-}
+};
 
 const User = require('../models/userModel').User;
-
 const { auth } = require('../../config/auth');
 const admin = require('../../config/admin');
 
-const
-router = express.Router();
+const router = express.Router();
 router.post('/login',
     passport.authenticate('local', {
         failureRedirect: '/',
@@ -59,7 +57,7 @@ router.post('/register', async (req, res) => {
         }
     }
     else return res.render('index', { message: `Passwords are not equal`, login: req.body.login });
-})
+});
 
 router.put('/update/:id', async (req, res) => {
     const user = await model.User.findById(req.params.id);
@@ -72,38 +70,36 @@ router.put('/update/:id', async (req, res) => {
     const result = await user.save();
 
     res.send(result);
-})
+});
 
 router.get('/loggedin', auth, (req, res) => {
     res.render('loggedIn', { login: req.user.login, admin: req.user.admin });
-})
+});
 
 router.get('/loginError', (req, res) => {
     res.render('index', { message: "Invalid login or password", login: "" });
-})
+});
 
 router.get('/loggedout', (req, res) => {
     localStorage.removeItem('x-auth-token');
     res.render('index', { message: "User successfully logged out", login: "" });
-})
+});
 
 router.get('/api/users', (req, res) => {
     localStorage.removeItem('x-auth-token');
     res.render('index', { message: "User successfully logged out", login: "" });
-})
+});
 
 router.get('/api/getusers', async(req, res) => {
     const users = await User.find();
     res.send(users);
-})
+});
 
-// For testing registration and login page. Can be deleted if registration and login rout will be ready.
+router.delete('/user/:id', async (req, res) => {
+    const user = await User.findByIdAndRemove(req.params.id);
+    if (!user) return res.status(404).send('The user with the given ID does not exist');
 
-router.get('/admin', [auth, admin], (req, res) => {
-    console.log('Hello from GET!');
-    console.log(req.body);
-    res.send('Widok admina');
-})
-///////////////////////////////////////////////////////////////
+    res.send(user);
+});
 
 module.exports = router;
