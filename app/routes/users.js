@@ -88,12 +88,12 @@ router.get('/loggedout', (req, res) => {
 router.get('/api/users', (req, res) => {
     localStorage.removeItem('x-auth-token');
     res.render('index', { message: "User successfully logged out", login: "" });
-})
+});
 
 router.get('/api/getusers', async(req, res) => {
     const users = await User.find();
     res.send(users);
-})
+});
 
 router.delete('/user/:id', async (req, res) => {
     const user = await User.findByIdAndRemove(req.params.id);
