@@ -55,8 +55,6 @@ router.put('/update/:id', async (req, res) => {
     const user = await model.User.findById(req.params.id);
     if (!user) return res.status(404).send('The user with the given ID does not exist');
 
-    console.log(user.password);
-
     user.login = req.body.login ? req.body.login : user.login;
     user.email = req.body.email ? req.body.email : user.email;
     user.admin = req.body.admin ? req.body.admin : user.admin;
@@ -77,6 +75,16 @@ router.get('/loginError', (req, res) => {
 router.get('/loggedout', (req, res) => {
     localStorage.removeItem('x-auth-token');
     res.render('index', { message: "User successfully logged out", login: "" });
+})
+
+router.get('/api/users', (req, res) => {
+    localStorage.removeItem('x-auth-token');
+    res.render('index', { message: "User successfully logged out", login: "" });
+})
+
+router.get('/api/getusers', (req, res) => {
+    const users = await User.find();
+    res.send(users);
 })
 
 // For testing registration and login page. Can be deleted if registration and login rout will be ready.

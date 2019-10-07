@@ -1,5 +1,5 @@
 async function getUsers() {
-    const response = await fetch("http://localhost:8000/api/users");
+    const response = await fetch("http://localhost:8000/api/getusers");
     const result = await response.json();
     return result;
 };
@@ -13,7 +13,7 @@ async function postUser(login, email, password, confirm_password, admin) {
         admin
     };
 
-    const response = await fetch("http://localhost:8000/api/users/", {
+    const response = await fetch("http://localhost:8000/register/", {
         method: "post",
         headers: {
             "Content-type": "application/json; charset=UTF-8"
@@ -27,7 +27,7 @@ async function postUser(login, email, password, confirm_password, admin) {
 
 async function putUser(user) {
        
-    const url = `http://localhost:8000/api/users/${user.id}`;
+    const url = `http://localhost:8000/update/${user.id}`;
 
     const response = await fetch(url, {
         method: "put",
