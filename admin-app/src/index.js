@@ -11,17 +11,14 @@ import  confStore  from './configureStore';
 const container =document.getElementById('root') 
 ReactDOM.render(
     <AppContainer>
-        <Provider store = {confStore()}>
+       
         <App /> 
-    </Provider>
+   
     </AppContainer>,
     container
     
  
     
-
-
-
 
 
 );
