@@ -21,7 +21,7 @@ router.post('/login', passport.authenticate('local', { session: false }), (req, 
             admin: req.user.admin
         },
         process.env.JWT_SECRET
-    )
+    );
     res.redirect(`/users/loggedin/?secret_token=${token}`);
 });
 
@@ -55,8 +55,6 @@ router.put('/update/:id', async (req, res) => {
     const user = await model.User.findById(req.params.id);
     if (!user) return res.status(404).send('The user with the given ID does not exist');
 
-    console.log(user.password);
-
     user.login = req.body.login ? req.body.login : user.login;
     user.email = req.body.email ? req.body.email : user.email;
     user.admin = req.body.admin ? req.body.admin : user.admin;
@@ -80,22 +78,10 @@ router.get('/loggedout', (req, res) => {
 });
 
 router.delete('/user/:id', async (req, res) => {
-    const user = await model.User.findById(req.params.id);
+    const user = await User.findByIdAndRemove(req.params.id);
     if (!user) return res.status(404).send('The user with the given ID does not exist');
 
-    const index = courses.indexOf(course);
-    courses.splice(index, 1);
-
-    res.send(course);
+    res.send(user);
 });
-
-// For testing registration and login page. Can be deleted if registration and login rout will be ready.
-
-router.get('/admin', [auth, admin], (req, res) => {
-    console.log('Hello from GET!');
-    console.log(req.body);
-    res.send('Widok admina');
-});
-///////////////////////////////////////////////////////////////
 
 module.exports = router;
