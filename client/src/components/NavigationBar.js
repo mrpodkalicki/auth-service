@@ -5,24 +5,28 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
+import Box from '@material-ui/core/Box';
 import MenuIcon from '@material-ui/icons/Menu';
 
 class NavigationBar extends React.Component {
    
-    useStyles = makeStyles(theme => ({
-        root: {
-            flexGrow: 1,
-        },
-        menuButton: {
-            marginRight: theme.spacing(2),
-        },
-        title: {
-            flexGrow: 1,
-        },
-    }));
+   
     
     classesFun = () =>{
-        const classes = this.useStyles()
+         const useStyles = makeStyles(theme => ({
+             root: {
+                 flexGrow: 1,
+                 
+             },
+             menuButton: {
+                 marginRight: theme.spacing(2),
+             },
+             title: {
+                 flexGrow: 1,
+             },
+         }));
+
+        const classes = useStyles()
         return classes ;
     }
 
