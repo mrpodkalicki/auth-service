@@ -5,7 +5,7 @@ import {withStyles} from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
-
+import {images} from '../MainView.jsx'
 
 
 
@@ -55,7 +55,7 @@ class Header extends React.Component {
     
 
     render(){
-        console.log()
+        console.log(images)
         const {classes} = this.props;
         return(
             <Box className={classes.color_box} justifyContent="center"  alignItems="center">
