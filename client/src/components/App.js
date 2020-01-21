@@ -6,6 +6,7 @@ import propTypes from 'prop-types';
 import MainView from './MainView/MainView';
 import NavigationBar from './NavigationBar';
 
+
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({
@@ -14,6 +15,7 @@ const styles = (theme) => ({
         boxSizing:"border-box",
         margin:"0px",
         padding:"0px",
+        
     }
 })
 
