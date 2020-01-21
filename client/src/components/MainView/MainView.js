@@ -1,6 +1,9 @@
 import React from "react";
 import propTypes from 'prop-types';
 
+
+import Header from './Header/Header';
+
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -30,14 +33,7 @@ class MainView extends React.Component{
 
          
         return(
-                <Container className ={classes.root}>
-                    <Box className = {classes.container__img}>
-                        IMG
-                    </Box>
-                    <Typography>
-                        Welcome on me Side
-                    </Typography>
-                </Container>  
+               <Header/>
         )
     }
 }
