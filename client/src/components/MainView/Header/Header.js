@@ -6,6 +6,8 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import CardMedia from '@material-ui/core/CardMedia';
+
 
 import {images} from '../MainView.jsx'
 
@@ -92,10 +94,7 @@ const styles = (theme) => ({
     image_box__img:{
         backgroundImage:`${trucksHeader.src}`,
         width:"100%",
-        height:"33rem",
-        border:"solid red",
-        // zIndex:"1",
-        // minWidth:"120rem",
+        height:"53vh",
         position:"absolute"
 
     },
@@ -138,7 +137,7 @@ class Header extends React.Component {
                     <Typography className = { classes.image_box__text }>
                         Register and check for free !!!
                     </Typography>
-                    <Box src = { trucksHeader.src } alt = { trucksHeader.alt } className = { classes.image_box__img }></Box>
+                    <CardMedia image = { trucksHeader.src } title = { trucksHeader.alt } className = { classes.image_box__img }></CardMedia>
                 </Box>
             </Box>
             
