@@ -8,74 +8,92 @@ import Typography from '@material-ui/core/Typography';
 import {images} from '../MainView.jsx'
 
 
-
-
-
-
 const styles = (theme) => ({
     color_box:{
-        height:"20rem",
+        height:"25rem",
         background:"#0ADEB7",
         display:"flex",
-        
+        flexDirection:"column",
         padding:"0.2rem 5rem",
-        position:"relative",
+        position:"relative"
+        
     },
 
     color_box___text:{  
         fontFamily:"Merienda One, cursive",
         maxWidth:"68%",   
     },
-    color_box___text___smaller:{  
-        fontFamily:"Vibur, cursive",
-        fontSize:"2rem"     
+
+    color_box__regis_cont:{
+        // border:"solid red",
+        position:"absolute",
+        right:"0px",
+        bottom:"0px",
+        minWidth:"15%"
     },
 
+
+
     color_box__regis_box:{
-        border:"solid red",
+        // border:"solid red",
+        position:"relative",
+    },
+
+    color_box___text___smaller:{  
+        fontFamily:"Vibur, cursive",
+        fontSize:"2rem",
         position:"absolute",
-        bottom:"0px",
-        right:"0px",
+        bottom:"7rem",
+
     },
 
     color_box__arrow:{
-        
+        position:"absolute",
+        bottom:"2rem",
+        left:"6.5rem"
     },
 
-    color_box__triangle:{},
+    color_box__triangle:{
+        position:"absolute",
+        bottom:"-4.3rem",
+        right:"0px"
 
-    color_box__person_icon:{}
+    },
+
+    color_box__person_icon:{
+        zIndex:"1",
+        position:"absolute",
+        bottom:"1rem",
+        right:"0.8rem"
+    }
 
 })
 
-
-
-
 class Header extends React.Component {
-    
-
     render(){
-        console.log(images)
+        const {arrow, person, triangle} = images;
+        
         const {classes} = this.props;
         return(
             <Box className={classes.color_box} justifyContent="center"  alignItems="center">
                 <Typography  variant ="h2"   className = {classes.color_box___text}>
                     Do you want in a simple and fast way to manage your resources?
                 </Typography>
-                <Box className = {classes.color_box__regis_box}>
-                    <Typography variant = "body1" className = {classes.color_box___text___smaller}>
-                        REGISTER
-                    </Typography>
-                    <img className = {classes.color_box__arrow}>
-                        
-                    </img>
-                    <img className = {classes.color_box__person_icon}>
+                <Box className = { classes.color_box__regis_cont }>
+                    <Box className = { classes.color_box__regis_box }>
+                        <Typography variant = "body1" className = { classes.color_box___text___smaller }>
+                            REGISTER
+                        </Typography>
+                        <img src = { arrow.src } alt = { arrow.alt }   className = { classes.color_box__arrow }>
+                            
+                        </img>
+                        <img  src = { person.src } alt = { person.alt }  className = {classes.color_box__person_icon}>
 
-                    </img>
-                    <img className = {classes.color_box__triangle}>
-
-                    </img>
-
+                        </img>
+                        <img  src = { triangle.src } alt = { triangle.alt } className = {classes.color_box__triangle}>
+                        </img>
+                    </Box>
+                    
                 </Box>
                
             </Box>
