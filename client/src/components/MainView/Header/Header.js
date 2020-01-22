@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
 
 import {images} from '../MainView.jsx'
 
@@ -70,6 +71,15 @@ const styles = (theme) => ({
 })
 
 class Header extends React.Component {
+    constructor(prosp){
+        super()
+        this.preventDefault=() => {
+            console.log("siema")
+        }
+    }
+
+    
+
     render(){
         const {arrow, person, triangle} = images;
         
@@ -84,14 +94,12 @@ class Header extends React.Component {
                         <Typography variant = "body1" className = { classes.color_box___text___smaller }>
                             REGISTER
                         </Typography>
-                        <img src = { arrow.src } alt = { arrow.alt }   className = { classes.color_box__arrow }>
-                            
-                        </img>
-                        <img  src = { person.src } alt = { person.alt }  className = {classes.color_box__person_icon}>
-
-                        </img>
-                        <img  src = { triangle.src } alt = { triangle.alt } className = {classes.color_box__triangle}>
-                        </img>
+                        <img src = { arrow.src } alt = { arrow.alt }   className = { classes.color_box__arrow }></img>
+                        <Link href="#"  onClick={this.preventDefault} >
+                            <img  src = { person.src } alt = { person.alt }  className = {classes.color_box__person_icon}></img>
+                        <img  src = { triangle.src } alt = { triangle.alt } className = {classes.color_box__triangle}></img>
+                        </Link>
+                        
                     </Box>
                     
                 </Box>
