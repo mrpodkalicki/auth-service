@@ -11,6 +11,6 @@ const imgTwo = new Image('person', perosnPath, 'outline of person ');
 const imgThree = new Image('triangle', trainglePath, 'shape of triangle')
 const imgFour = new Image('trucksHeader',truckHeaderPath, 'trucks stand in row on parking' )
 
-const images= Images.addImgObj(imgOne, imgTwo, imgThree, imgFour );
+const imagesHeader= Images.addImgObj(imgOne, imgTwo, imgThree, imgFour );
 
-export {images}
+export {imagesHeader}

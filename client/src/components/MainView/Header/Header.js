@@ -9,9 +9,9 @@ import Link from '@material-ui/core/Link';
 import CardMedia from '@material-ui/core/CardMedia';
 
 
-import {images} from '../MainView.jsx'
+import {imagesHeader} from '../MainView.jsx'
 
-const {arrow, person, triangle, trucksHeader} = images;
+const {arrow, person, triangle, trucksHeader} = imagesHeader;
 
 const styles = (theme) => ({
     color_box:{
