@@ -3,11 +3,10 @@ import propTypes from 'prop-types';
 
 
 import Header from './Header/Header';
+import Offer from './Offer/Offer';
 
 import Container from '@material-ui/core/Container';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 
 const styles = (theme) => ({
@@ -33,7 +32,12 @@ class MainView extends React.Component{
 
          
         return(
-               <Header/>
+            <div>
+                <Header/>
+                <Offer/>
+            </div>
+              
+               
         )
     }
 }

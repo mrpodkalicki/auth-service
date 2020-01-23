@@ -77,7 +77,8 @@ const styles = (theme) => ({
     image_box:{
         display:"flex",
         justifyContent:"flex-end",
-        position:"relative"
+        position:"relative",
+        height: "53vh",
 
     },
 
@@ -101,7 +102,7 @@ const styles = (theme) => ({
 })
 
 class Header extends React.Component {
-    constructor(prosp){
+    constructor(props){
         super()
         this.preventDefault=() => {
             console.log("siema")
