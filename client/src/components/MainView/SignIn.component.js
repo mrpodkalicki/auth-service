@@ -51,6 +51,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const pressSignInBtn = () => {
+    console.log('signIn')
+}
+
+
 export default function SignIn() {
   const classes = useStyles();
 
@@ -92,7 +97,8 @@ export default function SignIn() {
             label="Remember me"
           />
           <Button
-            type="submit"
+            onClick = {pressSignInBtn}
+            // type="submit"
             fullWidth
             variant="contained"
             color="primary"

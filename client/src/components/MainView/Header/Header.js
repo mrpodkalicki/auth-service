@@ -91,9 +91,10 @@ const styles = (theme) => ({
 
     image_box__img:{
         backgroundImage:`${trucksHeader.src}`,
-        width:"100%",
+        backgroundColor:'green',
+        width:"100vw",
         height:"33rem",
-        border:"solid red",
+        // border:"solid red",
         // zIndex:"1",
         // minWidth:"120rem",
         position:"absolute"
@@ -138,7 +139,7 @@ class Header extends React.Component {
                     <Typography className = { classes.image_box__text }>
                         Register and check for free !!!
                     </Typography>
-                    <Box src = { trucksHeader.src } alt = { trucksHeader.alt } className = { classes.image_box__img }></Box>
+                    <Box  className = { classes.image_box__img }></Box>
                 </Box>
             </Box>
             

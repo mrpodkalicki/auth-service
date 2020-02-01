@@ -32,7 +32,7 @@ const styles = (theme) => ({
         position:"absolute",
         zIndex:'3',
         backgroundColor:'white',
-        top:'5rem',
+        top:'11rem',
         left:'40vw'
     },
 
