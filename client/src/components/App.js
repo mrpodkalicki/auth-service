@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter,Route } from 'react-router-dom';
 import propTypes from 'prop-types';
 
-
 import Start from './Start.view/Start.view';
 import NavigationBar from './Start.view/NavigationBar';
 
@@ -23,10 +22,11 @@ const App = (props) =>{
     return (
         <div className = {classes.root}>
             <NavigationBar/>
-            <BrowserRouter>
-                <Route path="/"  exact components = {Start}  />
-            </BrowserRouter>
-            <Start/>
+                <BrowserRouter>
+                    <div>
+                        <Route path="/"  exact component = {Start}  />
+                    </div>
+                </BrowserRouter>
         </div>
     );
 };
