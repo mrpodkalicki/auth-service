@@ -3,12 +3,10 @@ import { BrowserRouter,Route } from 'react-router-dom';
 import propTypes from 'prop-types';
 
 
-import MainView from './MainView/MainView';
-import NavigationBar from './MainView/NavigationBar';
+import Start from './Start.view/Start.view';
+import NavigationBar from './Start.view/NavigationBar';
 
-
-
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({
     root:{
@@ -26,9 +24,9 @@ const App = (props) =>{
         <div className = {classes.root}>
             <NavigationBar/>
             <BrowserRouter>
-                <Route path="/"  exact components = {MainView}  />
+                <Route path="/"  exact components = {Start}  />
             </BrowserRouter>
-            <MainView/>
+            <Start/>
         </div>
     );
 };

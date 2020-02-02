@@ -5,21 +5,14 @@ import propTypes from 'prop-types';
 import Header from './Header/Header';
 import SignIn from './SignIn.component'
 
-
-
-import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
-import { Redirect } from "react-router-dom";
+
 
 const styles = (theme) => ({
     root:{
         display:'flex',
-        // position:'relative',
-   
-       
     },
     container:{
 
@@ -27,7 +20,6 @@ const styles = (theme) => ({
         width:'100%'
     },
 
-    
     container__box:{
         position:"absolute",
         zIndex:'3',
