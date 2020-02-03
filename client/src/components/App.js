@@ -3,7 +3,7 @@ import { BrowserRouter,Route } from 'react-router-dom';
 import propTypes from 'prop-types';
 
 import Start from './Start.view/Start.view';
-import NavigationBar from './Start.view/NavigationBar';
+import NavigationBar from './NavigationBar.component/NavigationBar';
 
 import { withStyles } from '@material-ui/core/styles';
 

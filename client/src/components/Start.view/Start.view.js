@@ -2,8 +2,8 @@ import React from "react";
 import propTypes from 'prop-types';
 
 
-import Header from './Header/Header';
-import SignIn from './SignIn.component'
+import Header from './Header.component/Header.component';
+import SignIn from './SignIn.component/SignIn.component'
 
 import Box from '@material-ui/core/Box';
 import { withStyles } from '@material-ui/core/styles';
