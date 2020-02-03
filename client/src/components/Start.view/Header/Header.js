@@ -7,9 +7,19 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 
-import {images} from '../MainView.jsx'
+import {Image, Images} from '../../classes';
+import arrowPath from './images/arrow.png';
+import perosnPath from './images/person.png';
+import trainglePath from './images/triangle.png';
+import truckHeaderPath from './images/trucksHeader.png'
 
-const {arrow, person, triangle, trucksHeader} = images;
+
+const imgOne = new Image('arrow', arrowPath, 'curved arrow');
+const imgTwo = new Image('person', perosnPath, 'outline of person ');
+const imgThree = new Image('triangle', trainglePath, 'shape of triangle')
+const imgFour = new Image('trucksHeader',truckHeaderPath, 'trucks stand in row on parking' )
+
+const {arrow, person, triangle, trucksHeader} = Images.addImgObj(imgOne, imgTwo, imgThree, imgFour );
 
 const styles = (theme) => ({
     color_box:{
