@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import CardMedia from '@material-ui/core/CardMedia';
 
 import {Image, Images} from '../../classes';
 import arrowPath from './images/arrow.png';
@@ -19,7 +20,8 @@ const imgTwo = new Image('person', perosnPath, 'outline of person ');
 const imgThree = new Image('triangle', trainglePath, 'shape of triangle')
 const imgFour = new Image('trucksHeader',truckHeaderPath, 'trucks stand in row on parking' )
 
-const {arrow, person, triangle, trucksHeader} = Images.addImgObj(imgOne, imgTwo, imgThree, imgFour );
+const {arrow, person, triangle, trucksHeader, imagesHeader} = Images.addImgObj(imgOne, imgTwo, imgThree, imgFour );
+
 
 const styles = (theme) => ({
     color_box:{
@@ -85,7 +87,8 @@ const styles = (theme) => ({
     image_box:{
         display:"flex",
         justifyContent:"flex-end",
-        position:"relative"
+        position:"relative",
+        height: "53vh",
 
     },
 
@@ -113,7 +116,7 @@ const styles = (theme) => ({
 })
 
 class Header extends React.Component {
-    constructor(prosp){
+    constructor(props){
         super()
         this.preventDefault=() => {
             console.log("siema")
